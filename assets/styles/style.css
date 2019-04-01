@@ -8,10 +8,11 @@ body{
 }
 
 .register{
-    display: none;
+    display: flex;
     position: absolute;
-    top: 25%;
-    left: 33%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
     box-shadow: 6px 8px 12px 0px rgba(0,0,0,0.75);
 }
 
@@ -29,7 +30,7 @@ body{
 }
 
 .input-div{
-    margin: 10px 25px 0;
+    margin: 5px 25px 0;
 }
 
 .register-form{
@@ -186,8 +187,8 @@ main{
 
 .new-post-button{
     position: fixed;
-    top: 15px;
-    right: 65px;
+    bottom: 15px;
+    right: 15px;
     color: #fff;
     border-radius: 30px;
     border: none;
@@ -271,4 +272,10 @@ main{
     width: 40px;
     height: 40px;
     border-radius: 25px;
+}
+
+@media screen and (max-width: 768px){
+    .register-image{
+       display: none; 
+    }
 }

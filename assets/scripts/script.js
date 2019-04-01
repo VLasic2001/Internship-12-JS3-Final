@@ -68,11 +68,11 @@ function loginValidation() {
 }
 
 function loginSuccesfull() {
+    alert("Login successfull!")
   document.querySelector(".register").style.display = "none";
   document.querySelector("main").style.display = "flex";
-}
-
-(function getDataFromApi() {
+  document.body.style.backgroundColor = "white";
+  (function getDataFromApi() {
     window.onscroll = function(){scrollChecker()};
   let main = document.querySelector("main");
   fetch("https://jsonplaceholder.typicode.com/users")
@@ -115,6 +115,7 @@ function loginSuccesfull() {
     );
     main.innerHTML += `<div class="scroll-button-wrapper"><button onclick="scrollToTop()" class="scroll-button"></button></div>`;
 })();
+}
 
 function showDetails(e) {
   document.body.classList.add("stop-scrolling");

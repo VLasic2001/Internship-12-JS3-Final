@@ -73,6 +73,7 @@ function loginSuccesfull() {
 }
 
 (function getDataFromApi() {
+    window.onscroll = function(){scrollChecker()};
   let main = document.querySelector("main");
   fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
@@ -103,7 +104,6 @@ function loginSuccesfull() {
             </div>
             <div class="details-popup">
               <div class="details">
-
               </div>
             </div>
             <div class="posts-popup">
@@ -113,6 +113,7 @@ function loginSuccesfull() {
           </div>`)
       )
     );
+    main.innerHTML += `<div class="scroll-button-wrapper"><button onclick="scrollToTop()" class="scroll-button"></button></div>`;
 })();
 
 function showDetails(e) {
@@ -227,7 +228,7 @@ function newPost(id){
     document.body.style.paddingRight = "17px";
 }
 
-function SubmitNewPost(id, e){
+function SubmitNewPost(id){
     fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
         body: JSON.stringify({
@@ -247,4 +248,17 @@ function SubmitNewPost(id, e){
         `);
         closeNewPostPopup();
     }})
+}
+
+function scrollToTop(){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+function scrollChecker(){
+    if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
+        document.querySelector(".scroll-button-wrapper").style.display = "block";
+      } else {
+        document.querySelector(".scroll-button-wrapper").style.display = "none";
+      }
 }

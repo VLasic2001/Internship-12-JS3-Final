@@ -65,12 +65,13 @@ main{
     width: 100%;
     box-sizing: border-box;
     margin-top: 50px;
+    padding-right: 55px;
 }
 
 .wrapper{
-    width: 300px;
+    width: 250px;
     display: inline-block;
-    margin: 25px;
+    margin: 20px;
 }
 
 .user{
@@ -101,7 +102,7 @@ main{
 }
 
 .user-email, .user-city{
-    font-size: 18px;
+    font-size: 14px;
     margin-top: 10px;
 }
 
@@ -243,4 +244,31 @@ main{
     border-radius: 10px;
     border: 1px solid lightgray;
     background-color: lightgray;
+}
+
+.scroll-button {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+    content: "";
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-right: 0.2em solid rgb(255, 255, 255);
+    border-top: 0.2em solid rgb(255, 255, 255);
+    transform: rotate(-45deg);
+    margin-right: 0.5em;
+    margin-left: 1.0em;
+    background-color: transparent
+}
+
+.scroll-button-wrapper{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.123);
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
 }

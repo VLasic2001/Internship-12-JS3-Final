@@ -12,14 +12,14 @@ function setupLoginForm() {
 }
 
 function Submit() {
-let isAccountRegistered = localStorage.length == 0 ? false : true;
-if (!isAccountRegistered) {
+  let isAccountRegistered = localStorage.length == 0 ? false : true;
+  if (!isAccountRegistered) {
     if (registerValidation()) {
       localStorage.setItem(
         document.getElementsByName("username")[0].value,
         document.getElementsByName("password")[0].value
       );
-      alert("Account registered!")
+      alert("Account registered!");
       setupLoginForm();
     }
     return;
@@ -68,19 +68,21 @@ function loginValidation() {
 }
 
 function loginSuccesfull() {
-    alert("Login successfull!")
+  alert("Login successfull!");
   document.querySelector(".register").style.display = "none";
   document.querySelector("main").style.display = "flex";
   document.body.style.backgroundColor = "white";
   (function getDataFromApi() {
-    window.onscroll = function(){scrollChecker()};
-  let main = document.querySelector("main");
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then(response => response.json())
-    .then(users =>
-      users.forEach(
-        user =>
-          (main.innerHTML += `
+    window.onscroll = function() {
+      scrollChecker();
+    };
+    let main = document.querySelector("main");
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then(users =>
+        users.forEach(
+          user =>
+            (main.innerHTML += `
           <div class="wrapper">
             <div class="user">
               <img
@@ -95,9 +97,7 @@ function loginSuccesfull() {
               </div>
               <button
                 class="posts-button"
-                onclick="showPosts(${
-                    user.id
-                  }, this)"
+                onclick="showPosts(${user.id}, this)"
               >
                 User's posts
               </button>
@@ -111,61 +111,78 @@ function loginSuccesfull() {
                   </div>
             </div>
           </div>`)
-      )
-    );
-    main.innerHTML += `<div class="scroll-button-wrapper"><button onclick="scrollToTop()" class="scroll-button"></button></div>`;
-})();
+        )
+      );
+    main.innerHTML += `<div class="scroll-button-wrapper" onclick="scrollToTop()"><button class="scroll-button"></button></div>`;
+  })();
 }
 
 function showDetails(e) {
   document.body.classList.add("stop-scrolling");
   document.body.style.paddingRight = "17px";
-  e.parentElement.parentElement.querySelector(".details-popup").style.display = "block";
+  e.parentElement.parentElement.querySelector(".details-popup").style.display =
+    "block";
 }
 
 function closePopup(e) {
-    document.body.classList.remove("stop-scrolling");
-    document.body.style.paddingRight = "0";
-    e.parentElement.parentElement.style.display = "none";
-    e.parentElement.parentElement.querySelector(".details").innerHTML = '';
+  document.body.classList.remove("stop-scrolling");
+  document.body.style.paddingRight = "0";
+  e.parentElement.parentElement.style.display = "none";
+  e.parentElement.parentElement.querySelector(".details").innerHTML = "";
 }
 
 function closePostsPopup(e) {
   document.body.classList.remove("stop-scrolling");
   document.body.style.paddingRight = "0";
   e.parentElement.parentElement.style.display = "none";
-  e.parentElement.innerHTML = '';
+  e.parentElement.innerHTML = "";
 }
 
 function closeNewPostPopup() {
-  document.querySelector(".new-post-popup").remove()
+  document.querySelector(".new-post-popup").remove();
 }
 
 function showPosts(id, e) {
-    fetch('https://jsonplaceholder.typicode.com/users/1/posts')
+  fetch("https://jsonplaceholder.typicode.com/users/1/posts")
     .then(response => response.json())
-    .then(posts => e.parentElement.parentElement.
-        querySelector(".posts").innerHTML += posts.filter(post => post.userId === id).map(post =>`
+    .then(
+      posts =>
+        (e.parentElement.parentElement.querySelector(
+          ".posts"
+        ).innerHTML += posts
+          .filter(post => post.userId === id)
+          .map(
+            post => `
         <h2>Title: ${post.title}</h2>
         <p>Post ID: ${post.id}<p>
         <p>Post: ${post.body}<p>
         <br>
-        `).join('')
-    )
+        `
+          )
+          .join(""))
+    );
 
-    e.parentElement.parentElement.
-    querySelector(".posts").innerHTML += `<a class="close" onclick="closePostsPopup(this)"></a>
+  e.parentElement.parentElement.querySelector(
+    ".posts"
+  ).innerHTML += `<a class="close" onclick="closePostsPopup(this)"></a>
     <button class="new-post-button" onclick="newPost(${id})">New Post</button>`;
-    e.parentElement.parentElement.querySelector(".posts-popup").style.display = "block";
-    document.body.classList.add("stop-scrolling");
-    document.body.style.paddingRight = "17px";
+  e.parentElement.parentElement.querySelector(".posts-popup").style.display =
+    "block";
+  document.body.classList.add("stop-scrolling");
+  document.body.style.paddingRight = "17px";
 }
 
-function showDetails(id, e){
-    fetch('https://jsonplaceholder.typicode.com/users')
+function showDetails(id, e) {
+  fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
-    .then(users => e.parentElement.parentElement.querySelector(".details-popup")
-        .querySelector(".details").innerHTML += users.filter(user => user.id === id).map(user => `
+    .then(
+      users =>
+        (e.parentElement.parentElement
+          .querySelector(".details-popup")
+          .querySelector(".details").innerHTML += users
+          .filter(user => user.id === id)
+          .map(
+            user => `
             <h1>Name: ${user.name}</h1>
             <br />
             <p>Username: ${user.username}</p>
@@ -184,16 +201,19 @@ function showDetails(id, e){
             <p>Name: ${user.company.name}</p>
             <p>Phrase: ${user.company.catchPhrase}</p>
             <p>Bs: ${user.company.bs}</p>    
-        `))
+        `
+          ))
+    );
 
-        e.parentElement.parentElement.
-        querySelector(".details").innerHTML += '<a class="close" onclick="closePostsPopup(this)"></a>';
-        e.parentElement.parentElement.querySelector(".details-popup").style.display = "block";
-        document.body.classList.add("stop-scrolling");
-        document.body.style.paddingRight = "17px";
+  e.parentElement.parentElement.querySelector(".details").innerHTML +=
+    '<a class="close" onclick="closePostsPopup(this)"></a>';
+  e.parentElement.parentElement.querySelector(".details-popup").style.display =
+    "block";
+  document.body.classList.add("stop-scrolling");
+  document.body.style.paddingRight = "17px";
 }
 
-function newPost(id){
+function newPost(id) {
   document.querySelector("main").innerHTML += `
   <div class="new-post-popup">
   <div class="new-post">
@@ -214,7 +234,7 @@ function newPost(id){
           <div class="input-div">
             Body:<br />
             <input
-              type="text"
+              type="textarea"
               name="body-input"
               placeholder="Body"
               required
@@ -225,41 +245,49 @@ function newPost(id){
         </form>
         </div>
     </div>`;
-    document.body.classList.add("stop-scrolling");
-    document.body.style.paddingRight = "17px";
+  document.body.classList.add("stop-scrolling");
+  document.body.style.paddingRight = "17px";
 }
 
-function SubmitNewPost(id){
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify({
-          title: document.getElementsByName("title-input")[0].value,
-          body: document.getElementsByName("body-input")[0].value,
-          userId: id
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      }) 
-      .then(response => response.json())
-      .then(json => {if(json.id == 101){
+function SubmitNewPost(id) {
+  fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify({
+      title: document.getElementsByName("title-input")[0].value,
+      body: document.getElementsByName("body-input")[0].value,
+      userId: id
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+    .then(response => response.json())
+    .then(json => {
+      if (json.id == 101) {
         alert(`Post added successfully \n 
         User ID: ${json.userId} \n
         Title: ${json.title} \n
         `);
         closeNewPostPopup();
-    }})
-}
-
-function scrollToTop(){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
-function scrollChecker(){
-    if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
-        document.querySelector(".scroll-button-wrapper").style.display = "block";
-      } else {
-        document.querySelector(".scroll-button-wrapper").style.display = "none";
       }
+      else{
+          alert("There was an error when adding the post")
+      }
+    });
+}
+
+function scrollToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+function scrollChecker() {
+  if (
+    document.body.scrollTop > 350 ||
+    document.documentElement.scrollTop > 350
+  ) {
+    document.querySelector(".scroll-button-wrapper").style.display = "block";
+  } else {
+    document.querySelector(".scroll-button-wrapper").style.display = "none";
+  }
 }

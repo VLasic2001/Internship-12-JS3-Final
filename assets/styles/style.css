@@ -187,8 +187,8 @@ main{
 
 .new-post-button{
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    top: 15px;
+    right: 65px;
     color: #fff;
     border-radius: 30px;
     border: none;
